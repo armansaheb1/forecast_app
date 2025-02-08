@@ -1,0 +1,18 @@
+{
+  "welcome": "Welcome to our App!",
+  "enterApp": "Enter App",
+  "languageSelection": "Select your language",
+  "homeScreen": "Home Screen",
+  "horoscope": "Horoscope",
+  "coffeeReading": "Coffee Reading",
+  "profile": "Profile",
+  "home": "Home",
+  "history": "History",
+  "aiChat": "AI Chat",
+  "tarotIChing": "Tarot & I Ching",
+  "fortuneTeller": "Fortune Teller",
+  "adspacepromoteyourbusinesshere": "Ad Space - Promote Your Business Here!",
+  "coffeeReadingTitle": "Coffee Reading",
+  "uploadInstructions": "Please upload three images of your coffee cup for analysis.",
+  "analyzeButton": "Analyze Images"
+}
