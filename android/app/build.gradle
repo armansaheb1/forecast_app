@@ -2,17 +2,17 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-}
 
+}
 android {
-    compileSdkVersion 34  // Make sure this is set to the latest SDK version you want to use
+    compileSdkVersion 35  // Make sure this is set to the latest SDK version you want to use
 
     namespace 'com.example.forecast'  // Set your app's namespace here, e.g., 'com.example.forecast'
 
     defaultConfig {
         applicationId "com.example.forecast"
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdkVersion 25
+        targetSdkVersion 35
         versionCode 1   // Static value, adjust as necessary
         versionName "1.0.0"
     }
@@ -30,6 +30,20 @@ android {
     kotlinOptions {
         jvmTarget = "11"  // Set JVM target to 11
     }
+    dependencies {
+  // ...
+
+  // Import the Firebase BoM
+  implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
+
+  // When using the BoM, you don't specify versions in Firebase library dependencies
+
+  // TODO: Add the dependencies for Firebase products you want to use
+  // See https://firebase.google.com/docs/android/setup#available-libraries
+  // For example, add the dependencies for Firebase Authentication and Cloud Firestore
+  implementation("com.google.firebase:firebase-auth")
+  implementation("com.google.firebase:firebase-firestore")
+}
 }
 
 flutter {

@@ -4,13 +4,37 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:forecast_app/index.dart' as my_index;
 import 'package:forecast_app/coffee.dart';
+import 'package:forecast_app/horoscope.dart';
+import 'package:forecast_app/login.dart';
+import 'package:forecast_app/register.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+bool isSelected = false;
+bool isAuthenticated = false;
+
+Future<void> select() async {
+  isSelected = true;
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('isSelected', true);
+}
+
+Future<void> getData() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  isSelected = prefs.getBool('isSelected') ?? false;
+  // isAuthenticated = prefs.getBool('isAuthenticated') ?? false;
+}
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize(); // Initialize Google Ads SDK
+  await MobileAds.instance.initialize(); // Initialize Google Ads SDK
+  await getData();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
+
+String selectedLanguage = 'en';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -53,11 +77,19 @@ class _MyAppState extends State<MyApp> {
 
 /// Use ShellRoute to wrap screens with a persistent BottomNavigationBar
 final GoRouter _router = GoRouter(
-  initialLocation: '/coffee-reading',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',
       builder: (context, state) => const WelcomeScreen(),
+    ),
+    GoRoute(
+      path: '/login',
+      builder: (context, state) => SignInPage(),
+    ),
+    GoRoute(
+      path: '/register',
+      builder: (context, state) => const SignUpPage(),
     ),
     ShellRoute(
       builder: (context, state, child) {
@@ -75,6 +107,10 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: '/coffee-reading',
           builder: (context, state) => const CoffeeReadingScreen(),
+        ),
+        GoRoute(
+          path: '/horoscope',
+          builder: (context, state) => const Horoscope(),
         ),
       ],
     ),
@@ -107,7 +143,7 @@ class _MainScreenState extends State<MainScreen> {
     _bannerAd = BannerAd(
       adUnitId:
           'ca-app-pub-3940256099942544/6300978111', // Replace with your ad unit id
-      size: AdSize(width: 320, height: 50),
+      size: AdSize.fullBanner,
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
@@ -187,6 +223,7 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 /// WelcomeScreen with Language Selection
+
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
@@ -195,7 +232,28 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  String _selectedLanguage = 'en';
+  @override
+  void initState() {
+    super.initState();
+    _initialize();
+  }
+
+  Future<void> _initialize() async {
+    await getData();
+    _checkNavigation();
+  }
+
+  void _checkNavigation() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (isSelected) {
+        if (isAuthenticated) {
+          GoRouter.of(context).go('/home');
+        } else {
+          GoRouter.of(context).go('/login');
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -212,15 +270,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             const SizedBox(height: 20),
             DropdownButton<String>(
-              value: _selectedLanguage,
+              value: selectedLanguage,
               items: const [
                 DropdownMenuItem(value: 'en', child: Text('English')),
-                DropdownMenuItem(value: 'fa', child: Text('Farsi')),
+                DropdownMenuItem(value: 'fa', child: Text('فارسی')),
               ],
               onChanged: (String? newValue) {
                 if (newValue != null) {
                   setState(() {
-                    _selectedLanguage = newValue;
+                    selectedLanguage = newValue;
+
                     Locale newLocale = Locale(newValue);
                     MyApp.of(context)?.setLocale(newLocale);
                   });
@@ -230,7 +289,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                GoRouter.of(context).go('/home');
+                select();
+                GoRouter.of(context).go('/login');
               },
               child: Text(AppLocalizations.of(context)!.enterApp),
             ),

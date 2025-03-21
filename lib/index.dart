@@ -70,10 +70,9 @@ class HomePage extends StatelessWidget {
       // ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.grey.shade800, Colors.black], // رنگ زمینه
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+          image: DecorationImage(
+            image: const AssetImage('assets/images/index.jpg'),
+            fit: BoxFit.cover,
           ),
         ),
         child: Column(
@@ -129,12 +128,15 @@ class HomePage extends StatelessWidget {
                       Icons.chat,
                       Colors.green,
                       route: '/ai-chat'),
+                  _buildOptionCard(context, AppLocalizations.of(context)!.tarot,
+                      Icons.book, Colors.purple,
+                      route: '/tarot'),
                   _buildOptionCard(
                       context,
-                      AppLocalizations.of(context)!.tarotIChing,
+                      AppLocalizations.of(context)!.iChing,
                       Icons.book,
                       Colors.purple,
-                      route: '/tarot-iching'),
+                      route: '/iching'),
                 ],
               ),
             ),
@@ -153,7 +155,7 @@ class HomePage extends StatelessWidget {
         context.go(route!);
       },
       child: Card(
-        color: Colors.black54, // رنگ کارت‌ها
+        color: Colors.white54, // رنگ کارت‌ها
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 6,
         child: Column(

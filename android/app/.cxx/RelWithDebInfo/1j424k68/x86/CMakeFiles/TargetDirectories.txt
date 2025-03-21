@@ -1,0 +1,2 @@
+C:/Users/Arman Saheb/Desktop/forecast_app/android/app/.cxx/RelWithDebInfo/1j424k68/x86/CMakeFiles/edit_cache.dir
+C:/Users/Arman Saheb/Desktop/forecast_app/android/app/.cxx/RelWithDebInfo/1j424k68/x86/CMakeFiles/rebuild_cache.dir

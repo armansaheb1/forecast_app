@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "389695204866",
+    "project_id": "forecast-281f3",
+    "storage_bucket": "forecast-281f3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389695204866:android:d1d942ef5bb915cd83c11b",
+        "android_client_info": {
+          "package_name": "com.example.forecast"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP6qAa0VuaxMQbLWrdvToF8ITaET6wDKI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,8 +8,6 @@ allprojects {
 rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
     project.evaluationDependsOn(":app")
 }
 
@@ -25,5 +23,6 @@ buildscript {
     dependencies {
         // Ensure this version is updated
         classpath 'com.android.tools.build:gradle:7.4.1'  // Use the latest compatible version
+        
     }
 }

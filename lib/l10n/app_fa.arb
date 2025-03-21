@@ -1,4 +1,15 @@
 {
+    "language" : "fa",
+    "login" : "ورود",
+    "email": "ایمیل",
+    "password": "رمز عبور",
+    "fullName": "نام کامل",
+    "forgotPassword": "رمز عبور خود را فراموش کرده اید؟",
+    "orConnectWith": "یا وصل شوید با",
+    "dontHaveAccount": "حساب کاربری ندارید؟",
+    "loginNow": "هم اکنون وارد شوید",
+    "register" : "ثبت نام",
+    "pleaseLogin": "لطفاً برای استفاده از اپلیکیشن وارد شوید",
     "welcome": "به اپلیکیشن ما خوش آمدید!",
     "enterApp": "ورود به برنامه",
     "languageSelection": "زبان خود را انتخاب کنید",
@@ -9,10 +20,12 @@
     "coffeeReading": "خواندن قهوه",
     "history": "تاریخچه",
     "aiChat": "چت هوشمند",
-    "tarotIChing": "تاروت و ای چینگ",
+    "tarot": "تاروت ",
+    "iChing": "ای چینگ",
     "fortuneTeller": "پیشگویی کننده",
     "adspacepromoteyourbusinesshere": "فضای تبلیغاتی - تبلیغ کسب و کار خود را اینجا!",
     "coffeeReadingTitle": "فال قهوه",
+    
     "uploadInstructions": "لطفاً سه تصویر از فنجان قهوه خود برای تحلیل آپلود کنید.",
     "analyzeButton": "تحلیل تصاویر"
 }
