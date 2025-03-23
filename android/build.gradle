@@ -14,7 +14,11 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
-
+tasks.withType(JavaCompile).configureEach {
+    javaCompiler = javaToolchains.compilerFor {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
 buildscript {
     repositories {
         google()
@@ -22,7 +26,7 @@ buildscript {
     }
     dependencies {
         // Ensure this version is updated
-        classpath 'com.android.tools.build:gradle:7.4.1'  // Use the latest compatible version
-        
+        classpath 'com.android.tools.build:gradle:8.8.0'  // Use the latest compatible version
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.25"  // Update to the latest version
     }
 }
